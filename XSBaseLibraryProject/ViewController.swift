@@ -14,13 +14,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         let subV = UIView(frame: CGRect(x: 200, y: 100, width: 50, height: 50))
-        subV.backgroundColor = .black
-        
-        self.view.addSubview(subV)
-
-        
-        print("\(bgView.zc_x), \(bgView.zc_width),\(bgView.zc_height)")
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
