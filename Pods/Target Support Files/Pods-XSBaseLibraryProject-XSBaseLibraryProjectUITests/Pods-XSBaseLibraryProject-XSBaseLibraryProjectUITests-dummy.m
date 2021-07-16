@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_XSBaseLibraryProject_XSBaseLibraryProjectUITests : NSObject
+@end
+@implementation PodsDummy_Pods_XSBaseLibraryProject_XSBaseLibraryProjectUITests
+@end

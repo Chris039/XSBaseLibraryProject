@@ -1,0 +1,6 @@
+framework module Pods_XSBaseLibraryProject {
+  umbrella header "Pods-XSBaseLibraryProject-umbrella.h"
+
+  export *
+  module * { export * }
+}
