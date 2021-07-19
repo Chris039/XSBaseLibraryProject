@@ -28,11 +28,11 @@ extension Date {
     ///
     /// - Parameter isMsTime: 是否是毫秒级别
     /// - Returns: 时间戳
-    static func getNowTimeInterval(_ isMsTime: Bool = false) -> TimeInterval{
+    static func getNowTimeInterval(_ isMsTime: Bool = false) -> Int{
         let date = Date()
         let timeInterval = date.timeIntervalSince1970
         let millisecond = isMsTime == true ? Double(timeInterval * 1000) : timeInterval
-        return millisecond
+        return Int(millisecond)
     }
     
     /// 获取当前时间
@@ -149,9 +149,9 @@ extension Date {
     static func timeStampToString(timeStamp: String, dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let timeSta: TimeInterval
         if timeStamp.count == 10 {
-            timeSta = TimeInterval(timeStamp) ?? self.getNowTimeInterval()
+            timeSta = TimeInterval(timeStamp) ?? TimeInterval(self.getNowTimeInterval())
         } else {
-            timeSta = (TimeInterval(timeStamp) ?? self.getNowTimeInterval(true)) / 1000
+            timeSta = (TimeInterval(timeStamp) ?? TimeInterval(self.getNowTimeInterval(true))) / 1000
         }
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
@@ -168,14 +168,14 @@ extension Date {
     ///     - dateFormat: 时间格式
     ///     - isMsTime: 是否毫秒级别
     /// - Returns: 时间戳
-    static func timeToTimeStamp(time: String, dateFormat: String = "yyyy-MM-dd HH:mm:ss", isMsTime: Bool = false) -> TimeInterval {
+    static func timeToTimeStamp(time: String, dateFormat: String = "yyyy-MM-dd HH:mm:ss", isMsTime: Bool = false) -> Int {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = dateFormat
         let last = dateFormatter.date(from: time)
         guard let timeStamp = last?.timeIntervalSince1970 else { return Date.getNowTimeInterval(isMsTime) }
-        return isMsTime ? (timeStamp * 1000) : timeStamp
+        return Int(isMsTime ? (timeStamp * 1000) : timeStamp)
     }
     
     /// 时间格式之间的转换
@@ -221,7 +221,7 @@ extension Date {
         //获取当前的时间戳
         let currentTime = Date.getNowTimeInterval(isMsTime)
         //时间差
-        let reduceTime : TimeInterval = isMsTime ? (currentTime - timeStamp) / 1000 : (currentTime - timeStamp)
+        let reduceTime : TimeInterval = isMsTime ? (Double(currentTime) - timeStamp) / 1000 : (Double(currentTime) - timeStamp)
         //时间差小于60秒
         if reduceTime < 60 {
             return "刚刚"
